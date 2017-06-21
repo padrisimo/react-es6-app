@@ -12,19 +12,22 @@ class App extends Component {
     this.setState({val: this.state.val + 1})
   }
   componentWillMount() {
-    console.log('componentwillMount')
+    console.log('componentwillMount');
+    this.setState({m: 2});
   }
   componentDidMount() {
     console.log('componentDidMount')
+    this.inc = setInterval(this.update, 500);
   }
   componentWillUnmount() {
     console.log('====================================');
     console.log('componetWillUnmount');
     console.log('====================================');
+    clearInterval(this.inc);
   }
   render(){
     console.log('render');
-    return <button onClick={this.update}>{this.state.val}</button>
+    return <button onClick={this.update}>{this.state.val * this.state.m}</button>
   }
 }
 
