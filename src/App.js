@@ -3,37 +3,17 @@ import React, { Component } from 'react';
 
 class App extends Component {
   constructor(){
-      super();
-      this.state = {a: ''}
+    super();
+    this.state = {val: 0};
+    this.update = this.update.bind(this);
   }
   update(){
-      this.setState({
-        a: this.a.refs.input.value,
-        b: this.refs.b.value
-      })
+    this.setState({val: this.state.val + 1})
   }
   render(){
-    return(
-      <div>
-        <Input
-          ref={ component => this.a = component} 
-          update={this.update.bind(this)}
-        /> {this.state.a}
-        <hr />
-        <input
-          ref="b"
-          type="text"
-          onChange={this.update.bind(this)}
-        /> {this.state.b}
-      </div>
-    )
+    console.log('render');
+    return <button onClick={this.update}>{this.state.val}</button>
   }
 }
-
-class Input extends Component {
-  render(){
-    return <input ref="input" type="text" onChange={this.props.update} />
-  }
-}          
 
 export default App;
