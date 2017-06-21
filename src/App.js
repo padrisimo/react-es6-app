@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 
 
 class App extends Component {
@@ -10,10 +11,39 @@ class App extends Component {
   update(){
     this.setState({val: this.state.val + 1})
   }
+  componentWillMount() {
+    console.log('componentwillMount')
+  }
+  componentDidMount() {
+    console.log('componentDidMount')
+  }
+  componentWillUnmount() {
+    console.log('====================================');
+    console.log('componetWillUnmount');
+    console.log('====================================');
+  }
   render(){
     console.log('render');
     return <button onClick={this.update}>{this.state.val}</button>
   }
 }
 
-export default App;
+class Wrapper extends Component {
+  mount(){
+    ReactDOM.render(<App />, document.getElementById('a'))
+  }
+  unmount(){
+    ReactDOM.unmountComponentAtNode(document.getElementById('a'))
+  }
+  render(){
+    return (
+      <div>
+        <button onClick={this.mount.bind(this)}>Mount</button>
+        <button onClick ={this.unmount.bind(this)}>UnMount</button>
+        <div id="a"></div>
+      </div>
+    )
+  }
+}
+
+export default Wrapper;
